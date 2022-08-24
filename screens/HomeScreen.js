@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Text, View } from "react-native";
+import ResultsList from "../components/ResultsList";
 import SearchBar from "../components/SearchBar";
 // import openTable from "./../api/openTable";
+import useResults from "../hooks/useResults";
 
 const HomeScreen = () => {
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState([]);
 
-  const searchApi = async () => {
-    const api = await fetch(
-      `https://api.edamam.com/api/recipes/v2?type=public&q=${term}&app_id=960e8bb9&app_key=fd7a1eb6dff8cdb58eef4f79f1d83d97`
-    );
-    const data = await api.json();
-    setResults(data.hits);
-    console.log(data.hits)
+  const [searchApi, results] = useResults();
+
+  const filterByCalories = (minCal, maxCal) => {
+    return results.filter((result) => {
+      return (
+        result.recipe.calories >= minCal && result.recipe.calories <= maxCal
+      );
+    });
   };
+
   return (
     <View>
       <SearchBar
@@ -26,11 +29,18 @@ const HomeScreen = () => {
         HomeScreen
       </Text>
       <Text>{results.length}</Text>
-      {results.map((r) => (
-        <View key={r.recipe.uri}>
-          <Image source={{uri: r.recipe.image}} className="w-20 h-20" />
-        </View>
-      ))}
+      <ResultsList
+        results={filterByCalories(500, 1000)}
+        heading="Calories [500-1000]"
+      />
+      <ResultsList
+        results={filterByCalories(1000, 2000)}
+        heading="Calories [1000-2000]"
+      />
+      <ResultsList
+        results={filterByCalories(2000, 3000)}
+        heading="Calories [2000-3000]"
+      />
     </View>
   );
 };
