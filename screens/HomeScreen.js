@@ -23,7 +23,7 @@ const HomeScreen = () => {
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
-        onTermSubmit={searchApi}
+        onTermSubmit={()=> searchApi(term)}
       />
 
       <ScrollView>
@@ -40,10 +40,6 @@ const HomeScreen = () => {
           heading="Calories [2000-3000]"
         />
 
-        <ResultsList
-          results={filterByCalories(2000, 3000)}
-          heading="Calories [2000-3000]"
-        />
       </ScrollView>
     </>
   );

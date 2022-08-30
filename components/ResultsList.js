@@ -3,6 +3,9 @@ import { ScrollView, Text } from "react-native";
 import ResultCard from "./ResultCard";
 
 const ResultsList = ({ results, heading }) => {
+  if (!results.length) {
+    return null;
+  }
   return (
     <>
       <Text className="text-2xl font-bold ml-2 mt-4">{heading}</Text>
@@ -17,6 +20,7 @@ const ResultsList = ({ results, heading }) => {
             imgUrl={r.recipe.image}
             title={r.recipe.label}
             calories={r.recipe.calories}
+            ingredientLines={r.recipe.ingredientLines}
           />
         ))}
       </ScrollView>

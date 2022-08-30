@@ -3,6 +3,7 @@ import { Text, View, TextInput, SafeAreaView } from "react-native";
 import { SearchIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 
+
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
@@ -13,7 +14,7 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
   return (
     <SafeAreaView className="bg-gray-200 h-12 rounded-lg mx-4 flex flex-row mt-8 mb-2 px-4 items-center">
       <View className="mr-6">
-        <SearchIcon size={35} color={"green"} />
+        <SearchIcon size={35} color={"black"}/>
       </View>
       <TextInput
         className="flex-1 h-full text-lg"

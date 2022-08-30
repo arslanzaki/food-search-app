@@ -13,7 +13,7 @@ export default () => {
   };
 
   useEffect(() => {
-    searchApi("pizza");
+    searchApi("mango");
   }, []);
 
   return [searchApi, results];
